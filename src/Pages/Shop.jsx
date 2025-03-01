@@ -12,28 +12,28 @@ export default function Shop() {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
-  useEffect(()=>{
-    axios.get("http://dummyjson.com/products?limit=1000")
-    .then((res)=>{
-      console.log(res.data.products,1111)
-     setProducts(res.data.products)
-     setFilteredProducts(res.data.products)
-    })
-    .catch((err)=>{
-      console.log(err,222)
-    })
+  useEffect(() => {
+    axios.get("https://dummyjson.com/products?limit=1000")
+      .then((res) => {
+        console.log(res.data.products, 1111)
+        setProducts(res.data.products)
+        setFilteredProducts(res.data.products)
+      })
+      .catch((err) => {
+        console.log(err, 222)
+      })
 
-    axios.get("http://dummyjson.com/products/categories")
-    .then((res)=>{
-      console.log(res,3333)
-      setCategories(res.data)
-    
-    })
-    .catch((err)=>{
-      console.log(err,444)
-    })
+    axios.get("https://dummyjson.com/products/categories")
+      .then((res) => {
+        console.log(res, 3333)
+        setCategories(res.data)
 
-  },[])
+      })
+      .catch((err) => {
+        console.log(err, 444)
+      })
+
+  }, [])
 
   useEffect(() => {
     let filtered = [...products];
@@ -75,21 +75,21 @@ export default function Shop() {
                 color={selectedCategory === "All" ? "success" : "default"}
                 label={"All"}
                 component={Paper}
-                onClick={()=>setSelectedCategory("All")}
+                onClick={() => setSelectedCategory("All")}
               />
 
-              {categories.map((item)=>{
-                 return(
-         
+              {categories.map((item) => {
+                return (
 
-        <Chip 
-        onClick={()=>setSelectedCategory(item.slug)}
-                color={selectedCategory === item.slug ? "success" : "default"}
-                label={item.name}
-                component={Paper}
-                
-              />)
-            })}
+
+                  <Chip
+                    onClick={() => setSelectedCategory(item.slug)}
+                    color={selectedCategory === item.slug ? "success" : "default"}
+                    label={item.name}
+                    component={Paper}
+
+                  />)
+              })}
             </Box>
           </Box>
         </Grid2>
@@ -98,7 +98,7 @@ export default function Shop() {
           <Box>
             <TextField
               fullWidth
-              onChange={(e)=>setSearchTerm(e.target.value)}
+              onChange={(e) => setSearchTerm(e.target.value)}
               type="search"
               label="Search product here"
               placeholder="search product by title"
@@ -106,23 +106,23 @@ export default function Shop() {
             <Box sx={{ flexGrow: 1, p: 3 }}>
               <Grid2 container spacing={2}>
 
-                {filteredProducts.length>0?
-                filteredProducts.map((item)=>{
-                  return (<Grid2 size={{ xs: 12, sm: 4 }}>
-                    <ProductCard product={item} />
-                  </Grid2>
-                        )
-                }):
-                <Box sx={{ flexGrow: 1, p: 3 }}>
-                  <Grid2 container spacing={2}>
-                    <Grid2 size={{ xs: 12, sm: 12 }}>
-                      <NoData />
+                {filteredProducts.length > 0 ?
+                  filteredProducts.map((item) => {
+                    return (<Grid2 size={{ xs: 12, sm: 4 }}>
+                      <ProductCard product={item} />
                     </Grid2>
-                  </Grid2>
-                </Box>
-              }
-                
-                {  }
+                    )
+                  }) :
+                  <Box sx={{ flexGrow: 1, p: 3 }}>
+                    <Grid2 container spacing={2}>
+                      <Grid2 size={{ xs: 12, sm: 12 }}>
+                        <NoData />
+                      </Grid2>
+                    </Grid2>
+                  </Box>
+                }
+
+                { }
               </Grid2>
             </Box>
           </Box>
