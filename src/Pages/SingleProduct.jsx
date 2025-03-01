@@ -77,7 +77,8 @@ export default function SingleProduct() {
   //     "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png",
   // };
   //   console.log(productInfo);
- const[image,setImageIndex]=useState(0)
+ 
+  const[image,setImageIndex]=useState(0)
   let {id}=useParams() 
   const[productInfo,setProductInfo]=useState(null)
   useEffect(()=>{
